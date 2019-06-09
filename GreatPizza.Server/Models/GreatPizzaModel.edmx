@@ -1,0 +1,217 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="GreatPizza.Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Log">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+          <Property Name="Message" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Pizza">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="Deleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PizzaTopings">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PizzaId" Type="int" Nullable="false" />
+          <Property Name="TopingId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Toping">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="Deleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_PizzaTopings_Pizza">
+          <End Role="Pizza" Type="Self.Pizza" Multiplicity="1" />
+          <End Role="PizzaTopings" Type="Self.PizzaTopings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pizza">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PizzaTopings">
+              <PropertyRef Name="PizzaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PizzaTopings_Toping">
+          <End Role="Toping" Type="Self.Toping" Multiplicity="1" />
+          <End Role="PizzaTopings" Type="Self.PizzaTopings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Toping">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PizzaTopings">
+              <PropertyRef Name="TopingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="GreatPizzaModelStoreContainer">
+          <EntitySet Name="Log" EntityType="Self.Log" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pizza" EntityType="Self.Pizza" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PizzaTopings" EntityType="Self.PizzaTopings" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Toping" EntityType="Self.Toping" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_PizzaTopings_Pizza" Association="Self.FK_PizzaTopings_Pizza">
+            <End Role="Pizza" EntitySet="Pizza" />
+            <End Role="PizzaTopings" EntitySet="PizzaTopings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PizzaTopings_Toping" Association="Self.FK_PizzaTopings_Toping">
+            <End Role="Toping" EntitySet="Toping" />
+            <End Role="PizzaTopings" EntitySet="PizzaTopings" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="GreatPizza.Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Pizza">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="PizzaTopings" Relationship="Self.FK_PizzaTopings_Pizza" FromRole="Pizza" ToRole="PizzaTopings" />
+          <Property Name="Deleted" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PizzaTopings">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Pizza" Relationship="Self.FK_PizzaTopings_Pizza" FromRole="PizzaTopings" ToRole="Pizza" />
+          <NavigationProperty Name="Toping" Relationship="Self.FK_PizzaTopings_Toping" FromRole="PizzaTopings" ToRole="Toping" />
+        </EntityType>
+        <EntityType Name="Toping">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Deleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="PizzaTopings" Relationship="Self.FK_PizzaTopings_Toping" FromRole="Toping" ToRole="PizzaTopings" />
+        </EntityType>
+        <Association Name="FK_PizzaTopings_Pizza">
+          <End Role="Pizza" Type="Self.Pizza" Multiplicity="1" />
+          <End Role="PizzaTopings" Type="Self.PizzaTopings" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_PizzaTopings_Toping">
+          <End Role="Toping" Type="Self.Toping" Multiplicity="1" />
+          <End Role="PizzaTopings" Type="Self.PizzaTopings" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="GreatPizzaDbContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Pizza" EntityType="Self.Pizza" />
+          <EntitySet Name="PizzaTopings" EntityType="Self.PizzaTopings" />
+          <EntitySet Name="Toping" EntityType="Self.Toping" />
+          <AssociationSet Name="FK_PizzaTopings_Pizza" Association="Self.FK_PizzaTopings_Pizza">
+            <End Role="Pizza" EntitySet="Pizza" />
+            <End Role="PizzaTopings" EntitySet="PizzaTopings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PizzaTopings_Toping" Association="Self.FK_PizzaTopings_Toping">
+            <End Role="Toping" EntitySet="Toping" />
+            <End Role="PizzaTopings" EntitySet="PizzaTopings" />
+          </AssociationSet>
+          <EntitySet Name="Log" EntityType="GreatPizza.Model.Log" />
+        </EntityContainer>
+        <EntityType Name="Log">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Message" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="GreatPizzaModelStoreContainer" CdmEntityContainer="GreatPizzaDbContext">
+          <EntitySetMapping Name="Pizza">
+            <EntityTypeMapping TypeName="GreatPizza.Model.Pizza">
+              <MappingFragment StoreEntitySet="Pizza">
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PizzaTopings">
+            <EntityTypeMapping TypeName="GreatPizza.Model.PizzaTopings">
+              <MappingFragment StoreEntitySet="PizzaTopings">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Toping">
+            <EntityTypeMapping TypeName="GreatPizza.Model.Toping">
+              <MappingFragment StoreEntitySet="Toping">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="FK_PizzaTopings_Pizza" TypeName="GreatPizza.Model.FK_PizzaTopings_Pizza" StoreEntitySet="PizzaTopings">
+            <EndProperty Name="Pizza">
+              <ScalarProperty Name="Id" ColumnName="PizzaId" />
+            </EndProperty>
+            <EndProperty Name="PizzaTopings">
+              <ScalarProperty Name="Id" ColumnName="Id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_PizzaTopings_Toping" TypeName="GreatPizza.Model.FK_PizzaTopings_Toping" StoreEntitySet="PizzaTopings">
+            <EndProperty Name="Toping">
+              <ScalarProperty Name="Id" ColumnName="TopingId" />
+            </EndProperty>
+            <EndProperty Name="PizzaTopings">
+              <ScalarProperty Name="Id" ColumnName="Id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="Log">
+            <EntityTypeMapping TypeName="GreatPizza.Model.Log">
+              <MappingFragment StoreEntitySet="Log">
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="false" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.106
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreatPizza.Server", "GreatPizza.Server\GreatPizza.Server.csproj", "{43DB9840-642C-4F33-B6DA-8D7697292AAD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreatPizza.Common", "GreatPizza.Common\GreatPizza.Common.csproj", "{F6668F32-C3BA-449A-B4FC-795C03B9F59E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{43DB9840-642C-4F33-B6DA-8D7697292AAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{43DB9840-642C-4F33-B6DA-8D7697292AAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{43DB9840-642C-4F33-B6DA-8D7697292AAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{43DB9840-642C-4F33-B6DA-8D7697292AAD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F6668F32-C3BA-449A-B4FC-795C03B9F59E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6668F32-C3BA-449A-B4FC-795C03B9F59E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6668F32-C3BA-449A-B4FC-795C03B9F59E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6668F32-C3BA-449A-B4FC-795C03B9F59E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {20C8EF92-CB9A-4700-83A4-FF4B0391A59F}
+	EndGlobalSection
+EndGlobal

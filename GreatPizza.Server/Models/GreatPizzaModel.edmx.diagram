@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="37af221c4fcf4e43a0af6141fd5ed7e8" Name="Diagram1">
+        <EntityTypeShape EntityType="GreatPizza.Model.Pizza" Width="1.5" PointX="0.75" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="GreatPizza.Model.PizzaTopings" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="GreatPizza.Model.Toping" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <AssociationConnector Association="GreatPizza.Model.FK_PizzaTopings_Pizza" ManuallyRouted="false" />
+        <AssociationConnector Association="GreatPizza.Model.FK_PizzaTopings_Toping" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="GreatPizza.Model.Log" Width="1.5" PointX="5.25" PointY="1" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
